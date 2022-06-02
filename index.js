@@ -12,5 +12,5 @@ image.src = './img/map.png';
 console.log(image);
 
 image.onload = () => {
-    c.drawImage(image, 0, -1200);
+    c.drawImage(image, 0, -1300);
 }
