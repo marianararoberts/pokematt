@@ -9,8 +9,27 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 
 const image = new Image();
 image.src = './img/map.png';
-console.log(image);
+
+const playerImage = new Image();
+playerImage.src = './img/playerDown.png'
 
 image.onload = () => {
-    c.drawImage(image, 0, -1200);
+    c.drawImage(image, 0, -1350);
+    c.drawImage(
+        playerImage,
+        0,
+        0,
+        playerImage.width / 4,
+        playerImage.height,
+        canvas.width / 2.71 - playerImage.width / 4 / 2,
+        canvas.height / 1.8- playerImage.height / 2,
+        playerImage.width / 4,
+        playerImage.height
+    )
 }
+
+
+
+
+
+
