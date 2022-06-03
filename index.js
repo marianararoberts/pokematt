@@ -13,7 +13,30 @@ image.src = './img/map.png';
 const playerImage = new Image();
 playerImage.src = './img/playerDown.png'
 
-image.onload = () => {
+let backgroundX = 0
+let playerX = 0
+
+class Sprite {
+    constructor({position, velocity, image}) {
+        this.position = position
+        this.image = image
+    }
+    draw() {
+        c.drawImage(this.image, 0, -1350)
+    }
+}
+
+const background = new Sprite({
+    position: {
+        x: 0,
+        y: -1350
+    },
+    image: image
+})
+
+function playerMove() {
+    window.requestAnimationFrame(playerMove)
+    background.draw()
     c.drawImage(image, 0, -1350);
     c.drawImage(
         playerImage,
@@ -27,7 +50,24 @@ image.onload = () => {
         playerImage.height
     )
 }
+playerMove()
 
+window.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'w':
+            console.log('pressed w key')
+            break
+        case 'a':
+            console.log('pressed a key')
+            break
+        case 's':
+            console.log('pressed s key')
+            break
+        case 'd':
+            console.log('pressed d key')
+            break
+    }
+})
 
 
 
