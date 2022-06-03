@@ -52,6 +52,12 @@ function playerMove() {
 }
 playerMove()
 
+function animate(){
+    window.requestAnimationFrame(animate)
+    console.log('animate')
+}
+animate()
+
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'w':
