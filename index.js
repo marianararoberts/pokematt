@@ -13,8 +13,6 @@ image.src = './img/map.png';
 const playerImage = new Image();
 playerImage.src = './img/playerDown.png'
 
-let backgroundX = 0
-let playerX = 0
 
 class Sprite {
     constructor({position, velocity, image}) {
@@ -22,7 +20,7 @@ class Sprite {
         this.image = image
     }
     draw() {
-        c.drawImage(this.image, 0, -1350)
+        c.drawImage(this.image, this.position.x, this.position.y)
     }
 }
 
@@ -34,10 +32,24 @@ const background = new Sprite({
     image: image
 })
 
+const keys = {
+    w: {
+        pressed: false
+    },
+    a: {
+        pressed: false
+    },
+    s: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
+}
+
 function playerMove() {
     window.requestAnimationFrame(playerMove)
     background.draw()
-    c.drawImage(image, 0, -1350);
     c.drawImage(
         playerImage,
         0,
@@ -49,27 +61,56 @@ function playerMove() {
         playerImage.width / 4,
         playerImage.height
     )
+
+    if (keys.w.pressed) {
+        background.position.y = background.position.y + 3
+        console.log(background.position.y)
+    }
 }
 playerMove()
 
+// function animate(){
+//     window.requestAnimationFrame(animate)
+//     console.log('animate')
+// }
+// animate()
+
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
-        case 'w':
-            console.log('pressed w key')
-            break
-        case 'a':
-            console.log('pressed a key')
-            break
-        case 's':
-            console.log('pressed s key')
-            break
-        case 'd':
-            console.log('pressed d key')
-            break
+      case 'w':
+        keys.w.pressed = true
+        lastKey = 'w'
+        break
+      case 'a':
+        keys.a.pressed = true
+        lastKey = 'a'
+        break
+  
+      case 's':
+        keys.s.pressed = true
+        lastKey = 's'
+        break
+  
+      case 'd':
+        keys.d.pressed = true
+        lastKey = 'd'
+        break
     }
-})
-
-
-
-
-
+  })
+  
+  window.addEventListener('keyup', (e) => {
+    switch (e.key) {
+      case 'w':
+        keys.w.pressed = false
+        break
+      case 'a':
+        keys.a.pressed = false
+        break
+      case 's':
+        keys.s.pressed = false
+        break
+      case 'd':
+        keys.d.pressed = false
+        break
+    }
+  })
