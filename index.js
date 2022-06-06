@@ -45,7 +45,7 @@ function playerMove() {
         playerImage.width / 4,
         playerImage.height,
         canvas.width / 2.71 - playerImage.width / 4 / 2,
-        canvas.height / 1.8- playerImage.height / 2,
+        canvas.height / 1.8 - playerImage.height / 2,
         playerImage.width / 4,
         playerImage.height
     )
