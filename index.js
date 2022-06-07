@@ -61,7 +61,7 @@ function playerMove() {
         playerImage.width / 4,
         playerImage.height
     )
-
+      // once it gets to a certain point, the background should stop moving but the player keeps moving if possible
     if (keys.w.pressed) {
       background.position.y = background.position.y + 3
       console.log(background.position.y)
@@ -69,6 +69,18 @@ function playerMove() {
     if (keys.a.pressed) {
       background.position.x = background.position.x + 3
       console.log(background.position.y)
+    }
+    if (keys.s.pressed) {
+      background.position.y = background.position.y - 3
+      console.log(background.position.y)
+    }
+    if (keys.d.pressed) {
+      background.position.x = background.position.x - 3
+      console.log(background.position.y)
+    }
+    if (keys.a.pressed) {
+      background.position.x = background.position.x + 3
+      console.log(background.position.x)
     }
     if (keys.s.pressed) {
       background.position.y = background.position.y - 3
