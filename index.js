@@ -63,8 +63,20 @@ function playerMove() {
     )
 
     if (keys.w.pressed) {
-        background.position.y = background.position.y + 3
-        console.log(background.position.y)
+      background.position.y = background.position.y + 3
+      console.log(background.position.y)
+    }
+    if (keys.a.pressed) {
+      background.position.x = background.position.x + 3
+      console.log(background.position.y)
+    }
+    if (keys.s.pressed) {
+      background.position.y = background.position.y - 3
+      console.log(background.position.y)
+    }
+    if (keys.d.pressed) {
+      background.position.x = background.position.x - 3
+      console.log(background.position.y)
     }
 }
 playerMove()
