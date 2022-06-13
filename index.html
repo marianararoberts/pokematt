@@ -3,6 +3,9 @@
 
 <head>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -19,15 +22,13 @@
             right: 0; 
             border: 4px black solid;
             display: flex;">
-            <div>
+            <div style="width: 66.66%; display: grid; grid-template-columns: repeat(2, 1fr);">
                 <button>Attack1</button>
                 <button>Attack2</button>
-                <button>Attack3</button>
-                <button>Attack4</button>
             </div>
-            <div>
-                <h1>Your Remaining Health:</h1>
-                <h1>Opponent's Remaining Health:</h1>
+            <div style = "display: flex; align-items: center; justify-content: center; border-left: 4px black solid">
+                <h3>Your Remaining Health</h3>
+                <h3>Opponent's Remaining Health</h3>
             </div>
         </div>
     </div>
