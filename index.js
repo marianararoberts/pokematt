@@ -14,6 +14,11 @@ for (let i = 0; i < battleZonesData.length; i += 70) {
   battleZonesMap.push(battleZonesData.slice(i, 70 + i))
 }
 
+const doorMap = []
+for (let i = 0; i < doorData.length; i += 70) {
+  doorMap.push(doorData.slice(i, 70 + i))
+}
+
 const boundaries = []
 const offset = {
   x: -735,
@@ -28,6 +33,22 @@ collisionsMap.forEach((row, i) => {
           position: {
             x: j * Boundary.width + offset.x,
             y: i * Boundary.height + offset.y - 50
+          }
+        })
+      )
+  })
+})
+
+const doorZones = []
+
+doorMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 1025)
+    doorZones.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y
           }
         })
       )
@@ -120,7 +141,7 @@ const keys = {
   }
 }
 
-const movables = [background, foreground, ...boundaries, ...battleZones]
+const movables = [background, foreground, ...boundaries, ...battleZones, ...doorZones]
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
   return (
@@ -135,6 +156,10 @@ const battle = {
   initiated: false
 }
 
+const openDoor = {
+  initiated: false
+}
+
 function playerMove() {
   const animationId = window.requestAnimationFrame(playerMove)
   background.draw()
@@ -144,12 +169,65 @@ function playerMove() {
   battleZones.forEach((battleZone) => {
     battleZone.draw()
   })
+  doorZones.forEach((doorZone) => {
+    doorZone.draw()
+  })
   player.draw();
   foreground.draw();
 
   let moving = true
   player.moving = false;
   
+  if (openDoor.initiated) return
+
+  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+    for (let i = 0; i < doorZones.length; i++) {
+      const doorZone = doorZones[i]
+      const overlappingArea =
+        (Math.min(
+          player.position.x + player.width,
+          doorZone.position.x + doorZone.width
+        ) -
+          Math.max(player.position.x, doorZone.position.x)) *
+        (Math.min(
+          player.position.y + player.height,
+          doorZone.position.y + doorZone.height
+        ) -
+          Math.max(player.position.y, doorZone.position.y))
+      if (
+        rectangularCollision({
+          rectangle1: player,
+          rectangle2: doorZone
+        }) &&
+        overlappingArea > (player.width * player.height) / 2
+      ) {
+        window.cancelAnimationFrame(animationId)
+        openDoor.initiated = true
+        gsap.to('#transitionDiv', {
+          opacity: 1,
+          repeat: 3, 
+          yoyo: true,
+          duration: .4,
+          onComplete() {
+            gsap.to('#transitionDiv', {
+              opacity: 1,
+              duration: .4,
+              onComplete() {
+                animateBattle()
+                gsap.to('#transitionDiv', {
+                  opacity: 1,
+                  duration: .4
+                })
+              }
+            })
+            
+          }
+        })
+        break
+      }
+    }
+  }
+
   if (battle.initiated) return
 
   if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
