@@ -186,6 +186,7 @@ function playerMove() {
               opacity: 1,
               duration: .4
             })
+            animateBattle()
           }
         })
         break
@@ -302,12 +303,11 @@ function playerMove() {
 }
 playerMove()
 
-// function animate(){
-//     window.requestAnimationFrame(animate)
-//     console.log('animate')
-// }
-// animate()
+function animateBattle() {
+  window.requestAnimationFrame(animateBattle)
+}
 
+let lastKey = '';
 window.addEventListener('keydown', (e) => {
   switch (e.key) {
     case 'w':
