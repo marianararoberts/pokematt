@@ -22,7 +22,7 @@ collisionsMap.forEach((row, i) => {
         new Boundary({
           position: {
             x: j * Boundary.width + offset.x,
-            y: i * Boundary.height + offset.y
+            y: i * Boundary.height + offset.y-50
           }
         })
       )
