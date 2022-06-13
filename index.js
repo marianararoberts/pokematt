@@ -321,6 +321,28 @@ const battleBackground = new Sprite({
   image: battleBackgroundImage
 });
 
+const ourMattImage = new Image();
+ourMattImage.src = './img/ourMatt.png'
+
+const ourMatt = new Sprite({
+  position: {
+    x: 200,
+    y: 240
+  },
+  image: ourMattImage
+});
+
+const normalMattImage = new Image();
+normalMattImage.src = './img/normalMattSprite.png'
+
+const normalMatt = new Sprite({
+  position: {
+    x: 730,
+    y: -30
+  },
+  image: normalMattImage
+});
+
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
   gsap.to('#transitionDiv', {
@@ -328,6 +350,8 @@ function animateBattle() {
     duration: .4
   })
   battleBackground.draw();
+  normalMatt.draw()
+  ourMatt.draw()
 
 }
 
