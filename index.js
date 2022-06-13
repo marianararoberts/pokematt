@@ -9,6 +9,11 @@ for (let i = 0; i < collisions.length; i += 70) {
   collisionsMap.push(collisions.slice(i, 70 + i))
 }
 
+const battleZonesMap = []
+for (let i = 0; i < battleZonesData.length; i += 70) {
+  battleZonesMap.push(battleZonesData.slice(i, 70 + i))
+}
+
 const boundaries = []
 const offset = {
   x: -735,
@@ -19,6 +24,22 @@ collisionsMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
     if (symbol === 1025)
       boundaries.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y-50
+          }
+        })
+      )
+  })
+})
+
+const battleZones = []
+
+battleZonesMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 1025)
+      battleZones.push(
         new Boundary({
           position: {
             x: j * Boundary.width + offset.x,
@@ -98,7 +119,7 @@ const keys = {
   }
 }
 
-const movables = [background, foreground, ...boundaries]
+const movables = [background, foreground, ...boundaries, ...battleZones]
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
   return (
@@ -114,6 +135,9 @@ function playerMove() {
   background.draw()
   boundaries.forEach((boundary) => {
     boundary.draw();
+  })
+  battleZones.forEach(battleZone => {
+    battleZone.draw()
   })
   player.draw();
   foreground.draw();
