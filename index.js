@@ -184,9 +184,16 @@ function playerMove() {
           onComplete() {
             gsap.to('#transitionDiv', {
               opacity: 1,
-              duration: .4
+              duration: .4,
+              onComplete() {
+                animateBattle()
+                gsap.to('#transitionDiv', {
+                  opacity: 1,
+                  duration: .4
+                })
+              }
             })
-            animateBattle()
+            
           }
         })
         break
@@ -303,8 +310,25 @@ function playerMove() {
 }
 playerMove()
 
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = './img/battleBackground.png'
+
+const battleBackground = new Sprite({
+  position: {
+    x: 0,
+    y: 0
+  },
+  image: battleBackgroundImage
+});
+
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
+  gsap.to('#transitionDiv', {
+    opacity: 0,
+    duration: .4
+  })
+  battleBackground.draw();
+
 }
 
 let lastKey = '';
