@@ -2,6 +2,9 @@ body {
     background-image: url("img/csimage.png");
     text-align: center;
 }
+h1 {
+    margin: 0;
+}
 canvas {
     margin-top: 40px;
 }
