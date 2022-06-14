@@ -14,6 +14,7 @@ professorOakImage.src = './img/professor.png'
 
 const professorOak = new Sprite({
   position: {
+
     x: 100,
     y: 20
   },
