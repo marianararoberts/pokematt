@@ -4,6 +4,17 @@ const c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
+const battleItems = document.querySelectorAll('.battleItem');
+const battleItems2 = document.querySelectorAll('.battleItem2');
+
+battleItems.forEach(item => {
+  item.style.display = "none";
+});  
+
+battleItems2.forEach(item => {
+  item.style.opacity = 0.0;
+});  
+
 const collisionsMap = []
 for (let i = 0; i < collisions.length; i += 70) {
   collisionsMap.push(collisions.slice(i, 70 + i))
@@ -248,7 +259,7 @@ function playerMove() {
           rectangle2: battleZone
         }) &&
         overlappingArea > (player.width * player.height) / 2 &&
-        Math.random() < 0.01
+        Math.random() < 0.1
       ) {
         window.cancelAnimationFrame(animationId)
         battle.initiated = true
@@ -397,8 +408,19 @@ const battleBackground = new Sprite({
   image: battleBackgroundImage
 });
 
+const professorOakImage = new Image();
+professorOakImage.src = './img/professor.png'
+
+const professorOak = new Sprite({
+  position: {
+    x: 100,
+    y: 20
+  },
+  image: professorOakImage
+});
+
 const doorBackgroundImage = new Image();
-doorBackgroundImage.src = './img/battleBackground.png'
+doorBackgroundImage.src = './img/doorBackground.png'
 
 const doorBackground = new Sprite({
   position: {
@@ -440,7 +462,15 @@ function animateBattle() {
   battleBackground.draw();
   tiredMatt.draw()
   BCAMatt.draw()
+  battleItems.forEach(item => {
+    item.style.display = "flex";
+  });  
 
+  battleItems2.forEach(item => {
+    item.style.opacity = "";
+  });  
+
+  
 }
 
 function enterDoor() {
@@ -450,6 +480,7 @@ function enterDoor() {
     duration: .4
   })
   doorBackground.draw();
+  professorOak.draw();
 }
 
 document.querySelectorAll('button').forEach(button => {
