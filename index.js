@@ -205,7 +205,6 @@ function playerMove() {
         openDoor.initiated = true
         gsap.to('#transitionDiv', {
           opacity: 1,
-          repeat: 3, 
           yoyo: true,
           duration: .4,
           onComplete() {
@@ -213,14 +212,13 @@ function playerMove() {
               opacity: 1,
               duration: .4,
               onComplete() {
-                animateBattle()
+                enterDoor()
                 gsap.to('#transitionDiv', {
                   opacity: 1,
                   duration: .4
                 })
               }
             })
-            
           }
         })
         break
@@ -399,26 +397,16 @@ const battleBackground = new Sprite({
   image: battleBackgroundImage
 });
 
-const ourMattImage = new Image();
-ourMattImage.src = './img/ourMatt.png'
 
-const ourMatt = new Sprite({
+const doorBackgroundImage = new Image();
+doorBackgroundImage.src = './img/battleBackground.png'
+
+const doorBackground = new Sprite({
   position: {
-    x: 200,
-    y: 240
+    x: 0,
+    y: 0
   },
-  image: ourMattImage
-});
-
-const normalMattImage = new Image();
-normalMattImage.src = './img/normalMattSprite.png'
-
-const normalMatt = new Sprite({
-  position: {
-    x: 730,
-    y: -30
-  },
-  image: normalMattImage
+  image: doorBackgroundImage
 });
 
 function animateBattle() {
@@ -428,11 +416,17 @@ function animateBattle() {
     duration: .4
   })
   battleBackground.draw();
-  normalMatt.draw()
-  ourMatt.draw()
 
 }
-animateBattle()
+
+function enterDoor() {
+  window.requestAnimationFrame(enterDoor)
+  gsap.to('#transitionDiv', {
+    opacity: 0,
+    duration: .4
+  })
+  doorBackground.draw();
+}
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {
