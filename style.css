@@ -1,6 +1,20 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+}
 body {
     background-image: url("img/csimage.png");
     text-align: center;
+}
+h3 {
+    margin: 0;
+    font-size: 14px;
+}
+button {
+    border:0;
+    cursor: pointer;
+}
+button:hover {
+    background-color: lightgrey;
 }
 canvas {
     margin-top: 40px;
