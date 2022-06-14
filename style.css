@@ -21,12 +21,12 @@ canvas {
 }
 #transitionDiv {
     background-color: black;
-    position: absolute;
-    opacity: 0;
-    top: 40px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    z-index: 10;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
 }

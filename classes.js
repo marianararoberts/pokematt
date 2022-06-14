@@ -49,7 +49,6 @@ class Sprite {
     let dBox = document.querySelector('#dialogueBox');
     dBox.style.display = 'block'
     dBox.innerHTML = this.name + ' used ' + attack.name + '! Causing ' + damageDealt + ' damage.'
-
     const timeline = gsap.timeline()
     
     recipient.health -= damageDealt;
@@ -112,8 +111,7 @@ class Sprite {
         audio.battle.stop()
       }
     })
-    let dBox = document.querySelector('#dialogueBox');
-    dBox.innerHTML = 'Fight!'
+    document.querySelector('#dialogueBox').innerHTML = 'Fight!'
   }
 
 }

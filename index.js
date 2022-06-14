@@ -5,6 +5,7 @@ canvas.width = 1024;
 canvas.height = 576;
 
 const battleItems = document.querySelectorAll('.battleItem');
+const boxes = document.querySelectorAll('.box1');
 const battleItems2 = document.querySelectorAll('.battleItem2');
 
 battleItems.forEach(item => {
@@ -185,7 +186,8 @@ function playerMove() {
   })
   player.draw();
   foreground.draw();
-
+  if (openDoor.initiated)
+    player.position.y +=40;
   let moving = true
   player.moving = false;
   
@@ -227,6 +229,26 @@ function playerMove() {
                 gsap.to('#transitionDiv', {
                   opacity: 1,
                   duration: .4
+                })
+                battleItems.forEach(item => {
+                  item.style.display = "flex";
+                });
+                document.querySelector('#dialogueBox').style.display = "block"
+                boxes.forEach(item => {
+                  item.style.display = "none";
+                });
+                let dialogueThing = document.querySelector('#dialogueBox');
+                dialogueThing.innerHTML = "Hi! I'm Professor Oak!"
+                queue.push(() => {
+                  dialogueThing.innerHTML = "Congratulations on defeating a Pokematt!"
+                })
+                queue.push(() => {
+                  document.querySelector('#dialogueBox').style.display = "none"
+                  document.querySelector('#boxThing').style.display = "none"
+                  professorOak.faint();
+                  playerMove()
+                  cancelAnimationFrame(doorAnimationId)
+                  openDoor.initiated = false
                 })
               }
             })

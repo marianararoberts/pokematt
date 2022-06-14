@@ -58,6 +58,7 @@ const tiredMatt = new Sprite({
 });
 
 let battleAnimationId;
+let doorAnimationId;
 
 function animateBattle() {
   battleAnimationId = window.requestAnimationFrame(animateBattle)
@@ -71,7 +72,7 @@ function animateBattle() {
 }
 
 function enterDoor() {
-  window.requestAnimationFrame(enterDoor)
+  doorAnimationId = window.requestAnimationFrame(enterDoor)
   gsap.to('#transitionDiv', {
     opacity: 0,
     duration: .4
