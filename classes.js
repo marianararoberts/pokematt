@@ -102,8 +102,15 @@ class Sprite {
       y: this.position.y + 20
     })
     gsap.to(this, {
-      opacity: 0
+      opacity: 0,
+      onComplete: () => {
+        cancelAnimationFrame(battleAnimationId)
+        playerMove()
+        battle.initiated = false;
+      }
     })
+    let dBox = document.querySelector('#dialogueBox');
+    dBox.innerHTML = 'Fight!'
   }
 
 }

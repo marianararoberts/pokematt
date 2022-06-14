@@ -56,8 +56,10 @@ const tiredMatt = new Sprite({
   name: 'Tired Matt'
 });
 
+let battleAnimationId;
+
 function animateBattle() {
-  window.requestAnimationFrame(animateBattle)
+  battleAnimationId = window.requestAnimationFrame(animateBattle)
   gsap.to('#transitionDiv', {
     opacity: 0,
     duration: .3
@@ -122,7 +124,7 @@ document.querySelectorAll('button').forEach(button => {
           });
           tiredMatt.leave()
         })
-
+        
       }
     })
 

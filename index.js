@@ -259,7 +259,7 @@ function playerMove() {
           rectangle2: battleZone
         }) &&
         overlappingArea > (player.width * player.height) / 2 &&
-        Math.random() < 0.03
+        Math.random() < 0.02
       ) {
         window.cancelAnimationFrame(animationId)
         battle.initiated = true
@@ -273,6 +273,25 @@ function playerMove() {
               opacity: 1,
               duration: .4,
               onComplete() {
+                
+                BCAMatt.health = 100;
+                tiredMatt.health = 100;
+                let healthBar1 = '#enemyHealthBar'
+                let healthBar2 = '#playerHealthBar'
+                gsap.to(healthBar1, {
+                  width: BCAMatt.health + '%',
+                  duration: 0.01
+                })
+                gsap.to(healthBar2, {
+                  width: tiredMatt.health + '%',
+                  duration: 0.01
+                })
+                gsap.to(BCAMatt, {
+                  opacity: 1
+                })
+                gsap.to(tiredMatt, {
+                  opacity: 1
+                })
                 animateBattle()
                 battleItems.forEach(item => {
                   item.style.display = "flex";
