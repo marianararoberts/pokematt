@@ -97,6 +97,15 @@ class Sprite {
     })
   }
 
+  leave() {
+    gsap.to(this.position, {
+      y: this.position.y + 20
+    })
+    gsap.to(this, {
+      opacity: 0
+    })
+  }
+
 }
 
 class Boundary {

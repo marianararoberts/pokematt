@@ -65,13 +65,6 @@ function animateBattle() {
   battleBackground.draw();
   tiredMatt.draw()
   BCAMatt.draw()
-  battleItems.forEach(item => {
-    item.style.display = "flex";
-  });
-
-  battleItems2.forEach(item => {
-    item.style.opacity = "";
-  });
 }
 
 function enterDoor() {
@@ -99,7 +92,17 @@ document.querySelectorAll('button').forEach(button => {
       queue.push(() => {
         tiredMatt.faint()
       })
-      return
+      queue.push(() => {
+        battleItems.forEach(item => {
+          item.style.display = "none";
+        });
+        battleItems2.forEach(item => {
+          item.style.opacity = 0.0;
+        });
+        BCAMatt.leave()
+      })
+
+
     }
     queue.push(() => {
       tiredMatt.attack({
@@ -110,7 +113,16 @@ document.querySelectorAll('button').forEach(button => {
         queue.push(() => {
           BCAMatt.faint()
         })
-        return
+        queue.push(() => {
+          battleItems.forEach(item => {
+            item.style.display = "none";
+          });
+          battleItems2.forEach(item => {
+            item.style.opacity = 0.0;
+          });
+          tiredMatt.leave()
+        })
+
       }
     })
 

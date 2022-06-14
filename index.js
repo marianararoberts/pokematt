@@ -274,6 +274,12 @@ function playerMove() {
               duration: .4,
               onComplete() {
                 animateBattle()
+                battleItems.forEach(item => {
+                  item.style.display = "flex";
+                });
+                battleItems2.forEach(item => {
+                  item.style.opacity = "";
+                });
                 gsap.to('#transitionDiv', {
                   opacity: 1,
                   duration: .4
