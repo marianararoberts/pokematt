@@ -354,7 +354,7 @@ function animateBattle() {
   ourMatt.draw()
 
 }
-animateBattle()
+animateBattle();
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {
