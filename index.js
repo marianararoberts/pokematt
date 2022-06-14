@@ -273,7 +273,6 @@ function playerMove() {
               opacity: 1,
               duration: .4,
               onComplete() {
-                
                 BCAMatt.health = 100;
                 tiredMatt.health = 100;
                 let healthBar1 = '#enemyHealthBar'
