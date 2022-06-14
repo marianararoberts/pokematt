@@ -107,6 +107,9 @@ class Sprite {
         cancelAnimationFrame(battleAnimationId)
         playerMove()
         battle.initiated = false;
+        audio.Map.play()
+        audio.initBattle.stop()
+        audio.battle.stop()
       }
     })
     let dBox = document.querySelector('#dialogueBox');

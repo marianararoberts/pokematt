@@ -262,6 +262,10 @@ function playerMove() {
         Math.random() < 0.02
       ) {
         window.cancelAnimationFrame(animationId)
+
+        audio.Map.stop()
+        audio.initBattle.play()
+        audio.battle.play()
         battle.initiated = true
         gsap.to('#transitionDiv', {
           opacity: 1,
