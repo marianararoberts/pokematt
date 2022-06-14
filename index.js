@@ -205,7 +205,6 @@ function playerMove() {
         openDoor.initiated = true
         gsap.to('#transitionDiv', {
           opacity: 1,
-          repeat: 3, 
           yoyo: true,
           duration: .4,
           onComplete() {
@@ -213,14 +212,13 @@ function playerMove() {
               opacity: 1,
               duration: .4,
               onComplete() {
-                animateBattle()
+                enterDoor()
                 gsap.to('#transitionDiv', {
                   opacity: 1,
                   duration: .4
                 })
               }
             })
-            
           }
         })
         break
@@ -415,11 +413,12 @@ tiredMattImage.src = './img/normalMattSprite.png'
 
 const tiredMatt = new Sprite({
   position: {
-    x: 730,
-    y: -30
+    x: 0,
+    y: 0
   },
   image: tiredMattImage,
-  isEnemy: true
+  isEnemy: true,
+  image: doorBackgroundImage
 });
 
 function animateBattle() {
@@ -433,7 +432,15 @@ function animateBattle() {
   BCAMatt.draw()
 
 }
-animateBattle();
+
+function enterDoor() {
+  window.requestAnimationFrame(enterDoor)
+  gsap.to('#transitionDiv', {
+    opacity: 0,
+    duration: .4
+  })
+  doorBackground.draw();
+}
 
 document.querySelectorAll('button').forEach(button => {
   button.addEventListener('click', () =>
