@@ -259,7 +259,7 @@ function playerMove() {
           rectangle2: battleZone
         }) &&
         overlappingArea > (player.width * player.height) / 2 &&
-        Math.random() < 0.1
+        Math.random() < 0.03
       ) {
         window.cancelAnimationFrame(animationId)
         battle.initiated = true
@@ -396,104 +396,6 @@ function playerMove() {
   }
 }
 playerMove()
-
-const battleBackgroundImage = new Image();
-battleBackgroundImage.src = './img/battleBackground.png'
-
-const battleBackground = new Sprite({
-  position: {
-    x: 0,
-    y: 0
-  },
-  image: battleBackgroundImage
-});
-
-const professorOakImage = new Image();
-professorOakImage.src = './img/professor.png'
-
-const professorOak = new Sprite({
-  position: {
-    x: 100,
-    y: 20
-  },
-  image: professorOakImage
-});
-
-const doorBackgroundImage = new Image();
-doorBackgroundImage.src = './img/doorBackground.png'
-
-const doorBackground = new Sprite({
-  position: {
-    x: 0,
-    y: 0
-  },
-  image: doorBackgroundImage
-});
-
-const BCAMattImage = new Image();
-BCAMattImage.src = './img/ourMatt.png'
-
-const BCAMatt = new Sprite({
-  position: {
-    x: 200,
-    y: 240
-  },
-  image: BCAMattImage
-});
-
-const tiredMattImage = new Image();
-tiredMattImage.src = './img/normalMattSprite.png'
-
-const tiredMatt = new Sprite({
-  position: {
-    x: 720,
-    y: -20
-  },
-  image: tiredMattImage,
-  isEnemy: true
-});
-
-function animateBattle() {
-  window.requestAnimationFrame(animateBattle)
-  gsap.to('#transitionDiv', {
-    opacity: 0,
-    duration: .4
-  })
-  battleBackground.draw();
-  tiredMatt.draw()
-  BCAMatt.draw()
-  battleItems.forEach(item => {
-    item.style.display = "flex";
-  });  
-
-  battleItems2.forEach(item => {
-    item.style.opacity = "";
-  });  
-
-  
-}
-
-function enterDoor() {
-  window.requestAnimationFrame(enterDoor)
-  gsap.to('#transitionDiv', {
-    opacity: 0,
-    duration: .4
-  })
-  doorBackground.draw();
-  professorOak.draw();
-}
-
-document.querySelectorAll('button').forEach(button => {
-  button.addEventListener('click', () =>
-  BCAMatt.attack({attack: {
-    name: 'Fail Math',
-    damage: 20,
-    type: 'GPA'
-    },
-    recipient: tiredMatt
-  })
-  )
-})
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {

@@ -1,5 +1,5 @@
 class Sprite {
-  constructor({ position, velocity, image, frames = { max: 1 }, sprites, isEnemy = false }) {
+  constructor({ position, velocity, image, frames = { max: 1 }, sprites, isEnemy = false, name }) {
     this.position = position
     this.image = image
     this.frames = { ...frames, val: 0, elapsed: 0 }
@@ -13,6 +13,7 @@ class Sprite {
     this.opacity = 1
     this.health = 100
     this.isEnemy = isEnemy
+    this.name = name
   }
   draw() {
     c.save()
@@ -44,9 +45,14 @@ class Sprite {
     }
   }
   attack({attack, recipient}) {
-    const timeline = gsap.timeline()
+    let damageDealt = Math.floor(Math.random() * attack.damage) + 5;
+    let dBox = document.querySelector('#dialogueBox');
+    dBox.style.display = 'block'
+    dBox.innerHTML = this.name + ' used ' + attack.name + '! Causing ' + damageDealt + ' damage.'
 
-    this.health -= attack.damage
+    const timeline = gsap.timeline()
+    
+    recipient.health -= damageDealt;
 
     let movementDistance = 20
 
@@ -60,7 +66,7 @@ class Sprite {
       duration: 0.08,
       onComplete: () => {
         gsap.to(healthBar, {
-          width: this.health + '%'
+          width: recipient.health + '%'
         })
         gsap.to(recipient.position, {
           x: recipient.position.x + 10,
@@ -79,6 +85,18 @@ class Sprite {
       x: this.position.x
     })
   }
+
+  faint() {
+    let dBox = document.querySelector('#dialogueBox');
+    dBox.innerHTML = this.name + ' fainted!'
+    gsap.to(this.position, {
+      y: this.position.y + 20
+    })
+    gsap.to(this, {
+      opacity: 0
+    })
+  }
+
 }
 
 class Boundary {

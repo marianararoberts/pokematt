@@ -37,11 +37,14 @@
             right: 0; 
             border: 4px black solid;
             display: flex;">
+
+            <div id="dialogueBox" style="cursor: pointer; position: absolute; text-align: left; top: 0; bottom: 0; left: 0; right: 0; background-color: white; padding: 12px; display: none;">slayyyyyyyy</div>
+
             <div style="width: 66.66%; display: grid; grid-template-columns: repeat(2, 1fr);">
-                <button>Fail Math Test</button>
-                <button>No Sleep</button>
+                <button>Mathattack</button>
+                <button>Sleep</button>
             </div>
-            <div style = "display: flex; width: 33.33%; align-items: center; justify-content: center; border-left: 4px black solid; left: 50px;">
+            <div id="attackBox" style="display: flex; width: 33.33%; align-items: center; justify-content: center; border-left: 4px black solid; left: 50px;">
                 <h3>Attack Type</h3>
             </div>
         </div>
@@ -52,9 +55,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="data/battleZones.js"></script>
     <script src="data/collision.js"></script>
+    <script src="data/attacks.js"></script>
     <script src="data/door.js"></script>
     <script src="classes.js"></script>
     <script src="index.js"></script>
+    <script src="battle.js"></script>
 </body>
 
 </html>
