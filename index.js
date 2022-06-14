@@ -399,26 +399,27 @@ const battleBackground = new Sprite({
   image: battleBackgroundImage
 });
 
-const ourMattImage = new Image();
-ourMattImage.src = './img/ourMatt.png'
+const BCAMattImage = new Image();
+BCAMattImage.src = './img/ourMatt.png'
 
-const ourMatt = new Sprite({
+const BCAMatt = new Sprite({
   position: {
     x: 200,
     y: 240
   },
-  image: ourMattImage
+  image: BCAMattImage
 });
 
-const normalMattImage = new Image();
-normalMattImage.src = './img/normalMattSprite.png'
+const tiredMattImage = new Image();
+tiredMattImage.src = './img/normalMattSprite.png'
 
-const normalMatt = new Sprite({
+const tiredMatt = new Sprite({
   position: {
     x: 730,
     y: -30
   },
-  image: normalMattImage
+  image: tiredMattImage,
+  isEnemy: true
 });
 
 function animateBattle() {
@@ -428,11 +429,23 @@ function animateBattle() {
     duration: .4
   })
   battleBackground.draw();
-  normalMatt.draw()
-  ourMatt.draw()
+  tiredMatt.draw()
+  BCAMatt.draw()
 
 }
 animateBattle();
+
+document.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', () =>
+  BCAMatt.attack({attack: {
+    name: 'Fail Math',
+    damage: 20,
+    type: 'GPA'
+    },
+    recipient: tiredMatt
+  })
+  )
+})
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {
